@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presenting Mariam Eid</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M 50 10 L 90 75 L 10 75 Z' fill='none' stroke='%23c0392b' stroke-width='6' stroke-linejoin='round'/%3E%3Ccircle cx='50' cy='10' r='8' fill='%23e74c3c' /%3E%3Ccircle cx='90' cy='75' r='8' fill='%23e74c3c' /%3E%3Ccircle cx='10' cy='75' r='8' fill='%23e74c3c' /%3E%3Cpath d='M 50 10 L 50 55 L 90 75 M 50 55 L 10 75' fill='none' stroke='%23c0392b' stroke-width='4' stroke-dasharray='4'/%3E%3C/svg%3E">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/architect.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;800&family=Space+Mono&family=Caveat:wght@700&display=swap');
+
+        :root {
+            --bg: #ffffff;
+            --text: #1a1a1a;
+            --accent: #c0392b;
+            --ui-gray: #f0f0f0;
+            --chaos-bg: #e5e0d8;
+            --marker: #e74c3c;
+            --paper-offwhite: #f9f7f2;
+            --paper-brown: #d7c4a5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { height: 100%; width: 100%; overflow: hidden; font-family: 'Inter', sans-serif; background: #000; scroll-behavior: smooth;}
+
+        /* --- THE NEXUS --- */
+        #nexus {
+            display: flex; height: 100vh; width: 100vw; position: fixed; z-index: 2000;
+            background: #000; transition: transform 0.8s cubic-bezier(0.85, 0, 0.15, 1);
+        }
+        .side {
+            flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center;
+            cursor: pointer; transition: flex 0.5s cubic-bezier(0.4, 0, 0.2, 1), background 0.5s ease;
+            position: relative; overflow: hidden; text-align: center; padding: 40px;
+        }
+        .side.hired { background: #ffffff; color: #000; }
+        .side.inspired { background: var(--chaos-bg); color: var(--text); }
+        .side:hover { flex: 1.4; }
+        .side h2 { font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 800; text-transform: uppercase; z-index: 2; line-height: 1.1; letter-spacing: -1px; }
+
+        .nexus-divider {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            z-index: 2001; width: 80px; height: 80px; display: flex; justify-content: center; align-items: center;
+            border-radius: 50%; font-family: 'Space Mono', monospace; font-weight: 800; font-size: 18px; pointer-events: none;
+            border: 2px solid #000; background: #fff; color: #000; transition: 0.4s ease;
+        }
+        #nexus:has(.hired:hover) .nexus-divider { background: #000; color: #fff; border-color: #fff; transform: translate(-50%, -50%) scale(1.1); }
+        #nexus:has(.inspired:hover) .nexus-divider { background: var(--marker); color: #fff; border-color: #fff; transform: translate(-50%, -50%) scale(1.1); }
+
+        .presenting-tag { 
+            position: absolute; top: 40px; left: 50%; transform: translateX(-50%); 
+            z-index: 2002; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+            letter-spacing: 10px; text-transform: uppercase; color: #888; 
+            width: 100%; text-align: center; pointer-events: none;
+        }
+        .presenting-tag strong { color: #555; font-weight: 800; }
+
+        .image-placeholder {
+            width: 100%;
+            height: 150px;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            border: 1px dashed #ccc;
+        }
+
+        /* --- ARCHITECT (PROFESSIONAL) --- */
+        .arch-nav a { transition: 0.3s; }
+        .arch-nav a:hover { color: var(--accent) !important; text-shadow: 0 0 15px rgba(192, 57, 43, 0.6); }
+        html { scroll-padding-top: 150px; } /* This fixes the header hiding the section title */
+
+        #architect-path { display: none; background: var(--bg-primary, #F8F6F3); min-height: 100vh; overflow-y: auto; color: var(--text-primary, #1a1a1a); line-height: 1.6; position: relative; transition: background 0.4s, color 0.4s; }
+        #particleCanvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 1; opacity: 0.3; }
+        .arch-nav { position: fixed; top: 0; width: 100%; padding: 25px 40px; display: flex; justify-content: space-between; align-items: center; font-family: 'Inter', sans-serif; font-weight: 600; background: rgba(255,255,255,0.98); border-bottom: 1px solid #eee; z-index: 100; }
+        .arch-section-header { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 40px; color: #000; border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 5px; position: relative; z-index: 10; }
+        .arch-content { padding: 140px 10% 60px; position: relative; z-index: 10; }
+        
+        /* Global Fade-In Classes */
+        .arch-content > section > div, .arch-content > p, .arch-section-header, #invest {
+            opacity: 0; transform: translateY(30px); transition: opacity 0.8s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .reveal-visible { opacity: 1 !important; transform: translateY(0) translateX(0) !important; }
+
+        .arch-btn-hover { transition: all 0.3s ease; color: #000; background-color: transparent; }
+        .arch-nav a.arch-btn-hover:hover {
+            transform: translateY(-3px) scale(1.05) !important;
+            box-shadow: 0 8px 25px rgba(192, 57, 43, 0.5) !important;
+            background: var(--accent) !important;
+            color: #ffffff !important;
+            border-color: var(--accent) !important;
+            filter: brightness(1.1);
+        }
+
+        #architect-path .typewriter-text:not(.typing-done) { color: transparent; }
+
+        .arch-card { 
+            border: none; padding: 22px; background: #fff; font-size: 0.92rem; display: flex; flex-direction: column; gap: 15px; 
+            opacity: 0; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            transition: opacity 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s ease;
+        }
+        .arch-card:nth-child(odd) { transform: translateX(-40px); }
+        .arch-card:nth-child(even) { transform: translateX(40px); }
+        .arch-card.reveal-visible { animation: softFloat 6s ease-in-out infinite; }
+        .arch-card.reveal-visible:hover { animation-play-state: paused; transform: translateY(-5px) scale(1.02) !important; box-shadow: 0 0 25px rgba(192, 57, 43, 0.6); }
+        .arch-card h3 { font-size: 1.3rem !important; font-family: 'Inter', sans-serif; font-weight: 800; }
+        
+        @keyframes softFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .badge { display: inline-block; padding: 4px 12px; font-family: 'Space Mono', monospace; font-size: 10px; background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; margin-right: 5px; border-radius: 12px; box-shadow: 0 2px 8px rgba(192, 57, 43, 0.4); border: 1px solid rgba(255, 255, 255, 0.2); text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+        .tech-tags { margin-top: auto; padding-top: 15px; border-top: 1px solid #f0f0f0; }
+
+        /* --- STORYBOARD (INSPIRED) --- */
+        .sticky-nav-note { position: fixed !important; top: 20px !important; z-index: 2000 !important; display: inline-block !important; width: auto !important; min-width: 100px; text-align: center; background-color: #f5f5dc !important; }
+
+        #storyboard-path { 
+            display: none; 
+            background-color: #ddd8ce;
+            background-image:
+              url("https://www.transparenttextures.com/patterns/lined-paper.png"),
+              radial-gradient(circle at 20% 30%, rgba(231,76,60,0.06) 0%, transparent 50%),
+              radial-gradient(circle at 80% 70%, rgba(129,236,236,0.07) 0%, transparent 50%),
+              radial-gradient(circle at 50% 50%, rgba(254,202,87,0.05) 0%, transparent 60%);
+            min-height: 100vh; overflow-y: auto; color: #1a1a1a; position: relative; 
+        }
+        .story-nav { position: fixed; top: 30px; right: 50px; font-family: 'Caveat', cursive; font-size: 2rem; z-index: 1000; display: flex; align-items: center; gap: 30px; }
+        .story-nav a { text-decoration: none; color: var(--marker); transition: 0.3s; border-bottom: 3px solid transparent; }
+        .story-nav a:hover { border-bottom-color: var(--marker); }
+        .story-content { padding: 120px 10%; position: relative; z-index: 10; }
+        .story-section-header { font-family: 'Caveat', cursive; font-size: 3rem; color: var(--marker); margin-bottom: 30px; }
+        
+        .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; width: 100%; }
+
+        /* STORYBOARD STICKY NOTES */
+        .story-card { 
+            padding: 25px; min-height: 400px; position: relative; transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1); 
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.03);
+            cursor: pointer; background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .story-card:nth-child(odd) { background-color: var(--paper-offwhite); transform: rotate(-1.5deg); }
+        .story-card:nth-child(even) { background-color: var(--paper-brown); transform: rotate(1.5deg); }
+
+        .story-card { transform-style: preserve-3d; will-change: transform; }
+        .story-card:hover { z-index: 50; box-shadow: 20px 20px 40px rgba(0,0,0,0.15); }
+        
+        .story-pro-view { 
+            opacity: 1; transition: 0.4s; height: 100%; display: flex; flex-direction: column; justify-content: center; text-align: center; 
+        }
+        .story-pro-view h3 { font-family: 'Caveat', cursive; font-size: 2.2rem; color: var(--text); margin-bottom: 15px; }
+        .story-pro-view p { font-family: 'Caveat', cursive; font-size: 1.35rem; color: #555; padding: 0 10px; line-height: 1.5;}
+
+        .story-chaos-view { 
+            position: absolute; inset: 0; padding: 30px; opacity: 0; transition: 0.4s; 
+            font-family: 'Caveat', cursive; 
+            color: #1a1a1a; 
+            font-size: 1.35rem; line-height: 1.5; 
+            display: flex; flex-direction: column; justify-content: center; text-align: left;
+            background: inherit;
+        }
+
+        .story-chaos-view em {
+            font-style: normal;
+            color: var(--marker);
+            font-weight: 700;
+        }
+
+        .story-card:hover .story-pro-view { opacity: 0; transform: translateY(-20px); }
+
+        /* Highlighter effect */
+        .rough-highlight {
+            background: linear-gradient(104deg, rgba(255, 234, 112, 0) 0.9%, rgba(255, 234, 112, 0.8) 2.4%, rgba(255, 226, 68, 0.5) 5.8%, rgba(255, 234, 112, 0.4) 93%, rgba(255, 234, 112, 0) 96%);
+            padding: 0 4px;
+        }
+        /* Hand-drawn strikethrough */
+        .rough-strike {
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+        }
+        .rough-strike::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -2px;
+            right: -2px;
+            height: 2px;
+            background: var(--marker);
+            transform: rotate(-2deg);
+            border-radius: 50%;
+        }
+        /* Margin scribbles */
+        .margin-scribble {
+            position: absolute;
+            font-family: 'Caveat', cursive;
+            color: var(--marker);
+            font-size: 1.2rem;
+            opacity: 0.8;
+            pointer-events: none;
+            z-index: 100;
+        }
+        /* Torn paper insert */
+        .torn-paper {
+            background: #fdfbf7 url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+            padding: 30px;
+            margin: 30px auto;
+            width: 80%;
+            max-width: 400px;
+            transform: rotate(-2deg);
+            box-shadow: 2px 4px 10px rgba(0,0,0,0.1);
+            clip-path: polygon(0% 2%, 5% 0%, 15% 3%, 25% 0%, 35% 2%, 45% 0%, 55% 3%, 65% 0%, 75% 2%, 85% 0%, 95% 3%, 100% 0%, 100% 100%, 95% 98%, 85% 100%, 75% 97%, 65% 100%, 55% 98%, 45% 100%, 35% 97%, 25% 100%, 15% 98%, 5% 100%, 0% 98%);
+        }
+        /* Sticky note half-peeled */
+        .peeled-sticky {
+            position: absolute;
+            bottom: -15px;
+            right: -15px;
+            width: 60px;
+            height: 60px;
+            background: #ffeb3b;
+            box-shadow: -2px 2px 5px rgba(0,0,0,0.2);
+            transform: rotate(5deg);
+            border-bottom-right-radius: 20px;
+            z-index: 10;
+        }
+        .peeled-sticky::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, transparent 50%, rgba(0,0,0,0.1) 50%);
+            border-bottom-right-radius: 20px;
+        }
+        .story-card:hover .story-chaos-view { opacity: 1; transform: translateY(0); }
+
+        .story-card::before {
+            content: ""; position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            width: 100px; height: 30px; background: rgba(255,255,255,0.4);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02); z-index: 10;
+        }
+
+        .draggable-note {
+            position: absolute; width: 160px; padding: 15px; box-shadow: 2px 4px 8px rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.05);
+            font-family: 'Caveat', cursive; font-size: 1.1rem; cursor: move; z-index: 100; transition: transform 0.2s; user-select: none;
+            background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+        }
+        .draggable-note:nth-of-type(odd) { background-color: var(--paper-offwhite); }
+        .draggable-note:nth-of-type(even) { background-color: var(--paper-brown); }
+        .draggable-note { transform-style: preserve-3d; will-change: transform; }
+        .draggable-note:hover { z-index: 101; border-color: var(--marker); }
+        .draggable-note.is-dragging { box-shadow: 15px 25px 40px rgba(0,0,0,0.2) !important; cursor: grabbing !important; }
+        .draggable-note.soft-landing { transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) !important; }
+
+        .active { display: block !important; }
+        
+        .story-network-paper {
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+            cursor: pointer;
+        }
+        .story-network-paper:hover {
+            transform: rotate(0deg) translateY(-8px) scale(1.02) !important;
+            box-shadow: 15px 25px 35px rgba(0,0,0,0.12), inset 0 0 20px rgba(0,0,0,0.02) !important;
+        }
+
+        /* UPDATED COMPACT BUTTON EFFECTS */
+        .btn-invest-arch { transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1); text-transform: uppercase; letter-spacing: 1px; }
+        .btn-invest-arch:hover { background: #fff; color: #000 !important; transform: translateY(-3px); border-color: #fff; }
+        
+        .btn-invest-story { transition: all 0.3s ease; }
+        .btn-invest-story:hover { background: rgba(231, 76, 60, 0.08); color: var(--marker); text-decoration: underline; text-decoration-style: wavy; }
+    
+        /* --- INVEST PAGE OVERLAY --- */
+        #invest-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background-color: var(--paper-offwhite);
+            background-image: url("https://www.transparenttextures.com/patterns/paper-fibers.png");
+            z-index: 5000;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            font-family: 'Inter', sans-serif;
+            padding: 8vh 20px 10vh 20px;
+            text-align: center;
+            overflow-y: auto;
+        }
+        #invest-overlay.active { display: flex; }
+
+        .invest-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            gap: 30px;
+            max-width: 900px;
+            width: 100%;
+            margin: 40px auto 0 auto;
+        }
+
+        /* Individual Option Cards */
+        .invest-option, .invest-option-static {
+            border: none;
+            padding: 30px 20px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--paper-brown);
+            border-radius: 8px;
+            box-shadow: 2px 4px 15px rgba(0,0,0,0.08);
+            position: relative;
+            flex: 1 1 200px;
+            max-width: 260px;
+            text-align: center;
+        }
+        .invest-option:nth-child(even) { background: var(--paper-offwhite); }
+
+        .invest-option:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 10px 15px 30px rgba(0,0,0,0.12);
+        }
+
+        .invest-icon, .invest-icon-static {
+            width: 60px; height: 60px;
+            margin-bottom: 15px;
+            background: transparent;
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: var(--marker);
+            transition: 0.3s;
+        }
+
+        .invest-option:hover .invest-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Typography & Buttons */
+        .invest-option h4, .invest-option-static h4 {
+            font-family: 'Caveat', cursive;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+            letter-spacing: normal;
+            color: #333;
+            text-transform: none;
+        }
+
+        .invest-option p, .invest-option-static p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 25px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .invest-action-btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background: transparent;
+            color: var(--marker);
+            text-decoration: none;
+            font-family: 'Caveat', cursive;
+            font-size: 1.4rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border: 2px dashed var(--marker);
+            border-radius: 8px;
+            text-transform: none;
+        }
+
+        .invest-action-btn:hover {
+            background: var(--marker);
+            color: #fff;
+            border-style: solid;
+        }
+
+        .invest-return-btn {
+            margin-top: 40px;
+            margin-bottom: 40px;
+            padding: 10px 25px;
+            border: none;
+            border-bottom: 3px dashed var(--marker);
+            background: transparent;
+            color: var(--marker);
+            font-family: 'Caveat', cursive;
+            font-size: 1.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: none;
+            transition: 0.3s;
+        }
+        .invest-return-btn:hover {
+            color: #333;
+            border-color: #333;
+        }
+
+
+        /* --- CONTACT & COMING SOON OVERLAYS --- */
+        #contact-overlay, #coming-soon-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: #fff;
+            z-index: 5000;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            font-family: 'Inter', sans-serif;
+            padding: 8vh 20px 10vh 20px;
+            text-align: center;
+            overflow-y: auto;
+        }
+        #contact-overlay.active, #coming-soon-overlay.active { display: flex; }
+
+        .pulsing-loader {
+            width: 50px;
+            height: 50px;
+            background-color: #000;
+            border-radius: 50%;
+            margin: 0 auto 30px auto;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(0.8); opacity: 0.5; }
+        }
+        
+        .project-img-wrapper {
+            display: block;
+            width: 100%;
+            height: 180px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+        .project-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.5s ease, opacity 0.3s;
+            display: block;
+        }
+        .project-img:hover {
+            opacity: 0.9;
+            transform: scale(1.05);
+        }
+        
+        .draggable-pin {
+            position: absolute; font-size: 2.5rem; cursor: move; z-index: 100; transition: transform 0.2s; user-select: none;
+        }
+        .draggable-pin:hover { transform: scale(1.2); z-index: 101; }
+
+        .pencil-nav {
+            font-family: 'Caveat', cursive;
+            font-size: 1.8rem;
+            text-decoration: none;
+            color: #444;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+        .pencil-nav:hover {
+            color: var(--accent) !important;
+        }
+
+        /* --- MOBILE RESPONSIVE OVERRIDES --- */
+        @media (max-width: 768px) {
+            body, html { overflow-x: hidden !important; }
+            #architect-path, #storyboard-path { overflow-x: hidden !important; width: 100vw; }
+            
+            /* Nexus Intro Stack */
+            #nexus { flex-direction: column !important; }
+            .side { flex: 1 !important; width: 100% !important; }
+            .nexus-divider { width: 50px !important; height: 50px !important; font-size: 14px !important; }
+            
+            /* Typography */
+            h1 { font-size: 3.2rem !important; }
+            h2 { font-size: 2.4rem !important; }
+            .story-section-header { font-size: 2.4rem !important; }
+            .arch-section-header { font-size: 14px !important; margin-bottom: 20px !important; }
+            .presenting-tag { font-size: 1.5rem !important; }
+            
+            /* Images */
+            img { max-width: 100% !important; height: auto !important; }
+            
+            /* Navigations */
+            .arch-nav {
+                flex-direction: column !important;
+                padding: 15px 20px !important;
+                gap: 15px !important;
+                position: relative !important;
+            }
+            .arch-nav > div:first-child {
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                gap: 15px !important;
+            }
+            .story-nav {
+                top: 15px !important;
+                right: 15px !important;
+                font-size: 1.2rem !important;
+                gap: 15px !important;
+                flex-direction: column !important;
+                align-items: flex-end !important;
+            }
+            div[style*="top: 25px; left: 50%"] {
+                flex-wrap: wrap !important;
+                width: 90% !important;
+                justify-content: center !important;
+                gap: 15px !important;
+                top: 15px !important;
+            }
+            .pencil-nav { font-size: 1.4rem !important; }
+            
+            /* Grids */
+            .grid-container, .invest-grid {
+                grid-template-columns: 1fr !important;
+            }
+            div[style*="grid-template-columns: 1fr 1fr"] {
+                grid-template-columns: 1fr !important;
+                gap: 40px !important;
+            }
+            
+            /* Specific Section Layouts */
+            .arch-content > section:first-of-type {
+                flex-direction: column !important;
+                gap: 20px !important;
+                text-align: center !important;
+                margin-bottom: 60px !important;
+            }
+            #invest > div[style*="display: flex"] {
+                flex-direction: column !important;
+                gap: 20px !important;
+            }
+            #invest > div > div {
+                border-left: none !important;
+                padding-left: 0 !important;
+                text-align: left !important;
+            }
+            
+            /* Paddings */
+            .arch-content { padding: 40px 20px !important; }
+            .story-content { padding: 100px 20px 40px !important; }
+            #invest, #s-invest { padding: 40px 20px !important; }
+            
+            /* Overlays */
+            #invest-overlay, #contact-overlay, #coming-soon-overlay {
+                padding: 40px 20px !important;
+                overflow-y: auto !important;
+            }
+            
+            /* Draggable adjustments for mobile */
+            .draggable-note, .draggable-pin {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="nexus">
+        <div class="presenting-tag">Presenting <strong>MARIAM EID</strong></div>
+        <div class="side hired" onclick="showPath('architect')"><h2>Are you<br>to get me hired?</h2></div>
+        <div class="side inspired" onclick="showPath('storyboard')"><h2>Are you<br>to get inspired?</h2></div>
+        <div class="nexus-divider">OR</div>
+    </div>
+
+    <!-- ARCHITECT (PROFESSIONAL) -->
+    <div id="architect-path">
+        <canvas id="archParticles" style="position:fixed;top:0;left:0;width:100vw;height:100vh;pointer-events:none;z-index:0;opacity:0.4;"></canvas>
+        <nav class="arch-nav-new">
+            <a href="#" onclick="goBack()" class="nav-logo">← ME</a>
+            <div class="nav-links">
+                <a href="#motives" onclick="event.preventDefault(); document.getElementById('motives').scrollIntoView({behavior: 'smooth'});">Motives</a>
+                <a href="#experience" onclick="event.preventDefault(); document.getElementById('experience').scrollIntoView({behavior: 'smooth'});">Experience</a>
+                <a href="#projects" onclick="event.preventDefault(); document.getElementById('projects').scrollIntoView({behavior: 'smooth'});">Projects</a>
+                <a href="#skills" onclick="event.preventDefault(); document.getElementById('skills').scrollIntoView({behavior: 'smooth'});">Skills</a>
+                <a href="#check" onclick="event.preventDefault(); document.getElementById('check').scrollIntoView({behavior: 'smooth'});">Check</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+                <a href="#" onclick="openContactPage(event)" class="nav-btn nav-btn-outline">Contact</a>
+                <a href="Mariam Eid CV.pdf" download="Mariam Eid CV.pdf" class="nav-btn nav-btn-primary">Resume ↓</a>
+            </div>
+        </nav>
+        <!-- HERO SECTION -->
+        <section class="hero-section">
+            <div class="arch-container">
+                <div class="hero-grid">
+                    <div class="hero-text reveal">
+                        <div class="hero-badge"><span class="badge-dot"></span> HEY, I'M</div>
+                        <h1 class="hero-name">MARIAM<br><span class="accent">EID</span></h1>
+                        <p class="hero-title">CS Student &middot; <span class="highlight">Game Developer &middot; C# &amp; Unity</span></p>
+                        
+                        <p class="hero-desc">I bridge the gap between abstract concepts and actual, responsive logic. Looking for a team, a project, or a wild upcoming opportunity that's ready to build something that actually sticks.</p>
+                        
+                        <p class="hero-quote">"I turn 'what if' into standard WASD."</p>
+                        
+                        <div class="hero-ctas">
+                            <a href="#projects" class="btn-hero btn-hero-primary">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7m4 0h5v5m0-5L12 12"/></svg>
+                                View My Work
+                            </a>
+                            <a href="Mariam Eid CV.pdf" download="Mariam Eid CV.pdf" class="btn-hero btn-hero-secondary">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                Download Resume
+                            </a>
+                        </div>
+
+                        <div class="hero-socials">
+                            <span class="social-label">FIND ME ON</span>
+                            <div class="social-icons">
+                                <a href="https://github.com/mariem-eid" target="_blank" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg></a>
+                                <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+                                <a href="mailto:your.email@example.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-image-wrapper reveal reveal-delay-2">
+                        <div class="hero-photo-blob">
+                            <img src="pic.jpg" alt="Mariam Eid">
+                            <div class="floating-card card-top-right">
+                                <div class="card-icon">💻</div>
+                                <div class="card-text">
+                                    <strong>Open to Internships</strong>
+                                    <span>Backend &middot; Security</span>
+                                </div>
+                            </div>
+                            <div class="floating-card card-bottom-left">
+                                <div class="card-icon">🎓</div>
+                                <div class="card-text">
+                                    <strong>Cairo University</strong>
+                                    <span>CS &middot; Class of 2029</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- MOTIVES -->
+        <section id="motives" class="section-block">
+            <div class="arch-container">
+                <div class="section-header reveal">
+                    <div class="section-pill">MOTIVES</div>
+                    <h2 class="section-title">Why I <span class="accent">Do What</span> I Do</h2>
+                </div>
+                <div class="about-infinity-wrapper reveal">
+                    <span class="infinity-glyph">&#8734;</span>
+                    <p class="motive-text">Driven by a <span class="highlight">state of constant curiosity</span>. I view every project, tool, and challenge as an opportunity to expand my mental sandbox. For me, learning isn't a phase, <span class="highlight">it's a core operating system</span>. I am fiercely committed to remaining in &lsquo;perpetual beta,&rsquo; always seeking the next piece of wisdom that changes how I build and think.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE -->
+        <section id="experience" class="section-block" style="background: var(--bg-accent);">
+            <div class="arch-container">
+                <div class="section-header reveal">
+                    <div class="section-pill">EXPERIENCE</div>
+                    <h2 class="section-title">Where I've <span class="accent">contributed</span></h2>
+                </div>
+                <div class="experience-timeline">
+                    <!-- Item 1: Academic Team Member -->
+                    <div class="timeline-item reveal">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-header-block">
+                                <span class="timeline-badge">College Activity</span>
+                                <h3 class="timeline-role">Academic team member</h3>
+                                <div class="timeline-org-row">
+                                    <h4>FCAI Game Dev club</h4>
+                                    <span class="timeline-date">Present</span>
+                                </div>
+                                <div class="org-socials-minimal">
+                                    <a href="https://www.facebook.com/FCA.Cairo.GD.Club" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
+                                    <a href="https://www.instagram.com/fcai_cairogdclub/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                                    <a href="https://www.linkedin.com/company/fcai-cu-game-development-club/posts/?feedView=all" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                                </div>
+                            </div>
+                            <div class="timeline-desc">
+                                <p>Supported students through <span class="highlight-text">content development</span>, work reviews, and hands-on guidance to ensure successful completion of the course.</p>
+                                <ul class="timeline-bullets">
+                                    <li>Created <span class="highlight-text">tips & tricks video resources</span>.</li>
+                                    <li>Stayed ahead of the curriculum through guidance from our community’s seniors.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 2: PR Head -->
+                    <div class="timeline-item reveal reveal-delay-1">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-header-block">
+                                <span class="timeline-badge">College Activity</span>
+                                <h3 class="timeline-role">PR Head</h3>
+                                <div class="timeline-org-row">
+                                    <h4>FCAI Game Dev club</h4>
+                                    <span class="timeline-date">Present</span>
+                                </div>
+                                <div class="org-socials-minimal">
+                                    <a href="https://www.facebook.com/FCA.Cairo.GD.Club" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg></a>
+                                    <a href="https://www.instagram.com/fcai_cairogdclub/" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.07zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                                    <a href="https://www.linkedin.com/company/fcai-cu-game-development-club/posts/?feedView=all" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></a>
+                                </div>
+                            </div>
+                            <div class="timeline-desc">
+                                <p>Built industry partnerships with external organizations and professionals to <span class="highlight-text">expand the club's network</span>.</p>
+                                <ul class="timeline-bullets">
+                                    <li>Organized <span class="highlight-text">community events</span> bridging student developers with the gaming industry.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 3: Python Tutor -->
+                    <div class="timeline-item reveal reveal-delay-2">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-header-block">
+                                <span class="timeline-badge">Volunteer</span>
+                                <h3 class="timeline-role">Python Tutor</h3>
+                                <div class="timeline-org-row">
+                                    <h4>Arabic Whales</h4>
+                                    <span class="timeline-date">2023 Oct - 2024 Feb</span>
+                                </div>
+                            </div>
+                            <div class="timeline-desc">
+                                <p>Taught Python fundamentals to beginners; designed lesson plans and delivered <span class="highlight-text">one-on-one support</span> from zero.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS -->
+        <section id="projects" class="section-block">
+            <div class="arch-container">
+                <div class="section-header reveal">
+                    <div class="section-pill">PROJECTS</div>
+                    <h2 class="section-title">Gallery <span class="accent">of my</span> work</h2>
+                </div>
+                <div class="projects-grid">
+                    <!-- ONEIROS -->
+                    <div class="flip-card reveal"><div class="flip-card-inner">
+                        <div class="flip-card-front"><div class="card-img-wrapper"><img src="oneiros.jpg" alt="Oneiros"></div><div class="card-body"><span class="card-badge">Grad Project</span><h3 class="card-title">Oneiros</h3><p class="card-desc">Dream-exploration game with real-time combat and dynamically evolving environments.</p><div class="card-tags"><span class="card-tag">C#</span><span class="card-tag">Unity</span></div></div></div>
+                        <div class="flip-card-back"><h3 class="card-back-title">Oneiros</h3>
+                            <div class="card-back-desc">
+                                <p>Solo-built a dream-exploration game with real-time combat, awareness-based progression, and dynamically evolving environments.</p>
+                                <ul class="timeline-bullets" style="margin-top:10px;">
+                                    <li><span class="highlight-text">Architected all systems</span> independently.</li>
+                                    <li>Ranked <span class="highlight-text">4th</span> by judges.</li>
+                                </ul>
+                            </div>
+                        <a href="https://weirdothen.itch.io/oneiros2" target="_blank" class="card-back-link">Play on Itch.io →</a></div>
+                    </div></div>
+
+                    <!-- KITCHEN CHAOS -->
+                    <div class="flip-card reveal reveal-delay-1"><div class="flip-card-inner">
+                        <div class="flip-card-front"><div class="card-img-wrapper"><img src="KC.jpg" alt="Kitchen Chaos"></div><div class="card-body"><span class="card-badge">Architecture Study</span><h3 class="card-title">Kitchen Chaos</h3><p class="card-desc">Advanced software architecture using State Machines and ScriptableObjects.</p><div class="card-tags"><span class="card-tag">C#</span><span class="card-tag">Unity</span></div></div></div>
+                        <div class="flip-card-back"><h3 class="card-back-title">Kitchen Chaos</h3>
+                            <div class="card-back-desc">
+                                <p>Implemented a Finite State Machine for cooking logic and scalable recipe data management.</p>
+                                <ul class="timeline-bullets" style="margin-top:10px;">
+                                    <li>Used <span class="highlight-text">C# delegates and Actions</span> for event-driven communication.</li>
+                                    <li>Managed logic via <span class="highlight-text">ScriptableObjects</span>.</li>
+                                </ul>
+                            </div>
+                        <a href="https://weirdothen.itch.io/kitchen-chaos" target="_blank" class="card-back-link">Play on Itch.io →</a></div>
+                    </div></div>
+
+                    <!-- NOTICED -->
+                    <div class="flip-card reveal reveal-delay-2"><div class="flip-card-inner">
+                        <div class="flip-card-front"><div class="card-img-wrapper"><img src="noticed.jpg" alt="NOTICED"></div><div class="card-body"><span class="card-badge">Solo Jam</span><h3 class="card-title">NOTICED</h3><p class="card-desc">Stealth game built in 48 hours focusing on dynamic visibility detection.</p><div class="card-tags"><span class="card-tag">C#</span><span class="card-tag">Unity</span></div></div></div>
+                        <div class="flip-card-back"><h3 class="card-back-title">NOTICED</h3>
+                            <div class="card-back-desc">
+                                <p>Solo-developed a stealth game in 48 hours using dynamic light/dark visibility detection.</p>
+                                <ul class="timeline-bullets" style="margin-top:10px;">
+                                    <li>Utilized <span class="highlight-text">trigger colliders and raycasting</span>.</li>
+                                    <li>Delivered a <span class="highlight-text">polished, bug-free build</span> with a cohesive narrative.</li>
+                                </ul>
+                            </div>
+                        <a href="https://weirdothen.itch.io/noticed" target="_blank" class="card-back-link">Play on Itch.io →</a></div>
+                    </div></div>
+
+                    <!-- STABLE BUILD 02 -->
+                    <div class="flip-card reveal reveal-delay-3"><div class="flip-card-inner">
+                        <div class="flip-card-front"><div class="card-img-wrapper"><img src="stable.jpg" alt="Stable Build 02"></div><div class="card-body"><span class="card-badge">Team Jam</span><h3 class="card-title">Stable Build 02</h3><p class="card-desc">Meta-game building the world while competing against hostile AI.</p><div class="card-tags"><span class="card-tag">C#</span><span class="card-tag">Unity</span></div></div></div>
+                        <div class="flip-card-back"><h3 class="card-back-title">Stable Build 02</h3>
+                            <div class="card-back-desc">
+                                <p>Co-developed a meta-game where the player builds the game world against a hostile AI.</p>
+                                <ul class="timeline-bullets" style="margin-top:10px;">
+                                    <li>Contributed to <span class="highlight-text">core systems programming</span>.</li>
+                                    <li>Provided original <span class="highlight-text">voice-over</span> and game concept design.</li>
+                                </ul>
+                            </div>
+                        <a href="https://mohamed20047.itch.io/stable-build" target="_blank" class="card-back-link">Play on Itch.io →</a></div>
+                    </div></div>
+
+                    <!-- MULTIPLAYER XO -->
+                    <div class="flip-card reveal reveal-delay-4"><div class="flip-card-inner">
+                        <div class="flip-card-front"><div class="card-img-wrapper"><img src="xo.jpg" alt="Multiplayer XO"></div><div class="card-body"><span class="card-badge">Networking</span><h3 class="card-title">Multiplayer XO</h3><p class="card-desc">Exploration of Unity Netcode with client-server architecture.</p><div class="card-tags"><span class="card-tag">C#</span><span class="card-tag">Unity</span><span class="card-tag">Netcode</span></div></div></div>
+                        <div class="flip-card-back"><h3 class="card-back-title">Multiplayer XO</h3>
+                            <div class="card-back-desc">
+                                <p>Implemented networked state synchronization and client-server architecture.</p>
+                                <ul class="timeline-bullets" style="margin-top:10px;">
+                                    <li>Used Unity's <span class="highlight-text">Netcode for GameObjects</span>.</li>
+                                    <li>Explored core challenges of <span class="highlight-text">real-time multiplayer systems</span>.</li>
+                                </ul>
+                            </div>
+                        <a href="https://weirdothen.itch.io/tic-tac-toe" target="_blank" class="card-back-link">Play on Itch.io →</a></div>
+                    </div></div>
+                    
+                    <!-- ERASHIFT -->
+                    <div class="flip-card reveal reveal-delay-5"><div class="flip-card-inner">
+                        <div class="flip-card-front"><div class="card-img-wrapper"><img src="erashift.jpg.png" alt="ERAshift" style="background-color: #dcbf8c; object-fit: contain;"></div><div class="card-body"><span class="card-badge">Team Jam</span><h3 class="card-title">ERAshift</h3><p class="card-desc">Team-built jam game featuring a functional in-game store and smooth scene flow.</p><div class="card-tags"><span class="card-tag">C#</span><span class="card-tag">Unity</span><span class="card-tag">UI/UX</span></div></div></div>
+                        <div class="flip-card-back"><h3 class="card-back-title">ERAshift</h3>
+                            <div class="card-back-desc">
+                                <p>Contributed to a team-built jam game focusing on UI integration and flow management.</p>
+                                <ul class="timeline-bullets" style="margin-top:10px;">
+                                    <li>Engineered an <span class="highlight-text">in-game store system</span> with item management.</li>
+                                    <li>Architected <span class="highlight-text">scene transition management</span> for consistent game states.</li>
+                                </ul>
+                            </div>
+                        <a href="https://weirdothen.itch.io/erashift" target="_blank" class="card-back-link">Play on Itch.io →</a></div>
+                    </div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills" class="section-block" style="background: var(--bg-accent);">
+            <div class="arch-container">
+                <div class="section-header reveal">
+                    <div class="section-pill">SKILLS</div>
+                    <h2 class="section-title">Skills <span class="accent">harnessed</span></h2>
+                </div>
+                <div class="skills-grid">
+                    <div class="skill-card reveal"><div class="skill-icon">⚙️</div><h3 class="skill-name">Architectural Logic (C# &amp; Unity)</h3><p class="skill-desc">Focused on scalable code architecture and Object-Oriented patterns to build robust systems.</p></div>
+                    <div class="skill-card reveal reveal-delay-1"><div class="skill-icon">🎮</div><h3 class="skill-name">World Building (Game Design)</h3><p class="skill-desc">Specialist in player engagement strategies, backed by a CalArts Game Design foundation.</p></div>
+                    <div class="skill-card reveal reveal-delay-2"><div class="skill-icon">🎨</div><h3 class="skill-name">User-Centric Design (UI/UX)</h3><p class="skill-desc">egFWD UX Graduate proficient in Figma. Ensuring projects are intuitive and player-focused.</p></div>
+                    <div class="skill-card reveal reveal-delay-3"><div class="skill-icon">🌍</div><h3 class="skill-name">Global Communication</h3><p class="skill-desc">Advanced C1 English fluency for clear documentation and seamless international collaboration.</p></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- INVITATION FOOTER (CHECK) -->
+        <section id="check" class="arch-footer">
+            <div class="arch-container">
+                <div class="reveal">
+                    <div class="section-header">
+                        <div class="section-pill">TO CHECK</div>
+                        <h2 class="section-title">Invest in <span class="accent">the journey</span></h2>
+                    </div>
+                    <p class="footer-desc" style="max-width: 700px;">I'm actively seeking insights and resources beyond academic study. <strong style="color:var(--color-primary); font-size:1.15rem; display:block; margin: 15px 0;">"If you have the wisdom, I have the hunger."</strong> Whether it's a <strong>quick chat</strong>, a <strong>book recommendation</strong>, or a <strong>brutal critique</strong>—your time is the greatest investment I could possibly ask for.</p>
+                    <button onclick="openInvestPage(event)" class="footer-cta">RSVP &amp; Collaborate →</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- STORYBOARD (INSPIRED) -->
+    <div id="storyboard-path">
+        <!-- New Yellow Notes -->
+        <!-- New Yellow Notes -->
+        <div class="draggable-note" style="top: 200px; right: 50px; transform: rotate(5deg); background-color: #ffeaa7; font-weight: bold; width: 90px; height: 90px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 10px; border-radius: 2px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1);">Stay Curious.</div>
+        <div class="draggable-note" style="bottom: 250px; right: 100px; transform: rotate(-3deg); background-color: #fab1a0; font-weight: bold; width: 90px; height: 90px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 10px; border-radius: 2px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1);">Iterate daily.</div>
+        
+        
+        <!-- Draggable Pins -->
+        <div class="draggable-pin" style="top: 250px; right: 4%;">📌</div>
+        <div class="draggable-pin" style="top: 800px; left: 4%;">📌</div>
+        <div class="draggable-pin" style="top: 1400px; right: 4%;">📌</div>
+        
+        <!-- Draggable Nav Bookmarks -->
+        <div style="position: fixed; top: 25px; left: 50%; transform: translateX(-50%); z-index: 2000; display: flex; gap: 40px; width: auto; background: rgba(229, 224, 216, 0.85); backdrop-filter: blur(8px); padding: 8px 24px; border-radius: 30px;">
+            <a href="#s-why" class="pencil-nav">01 Drive</a>
+            <a href="#s-journey" class="pencil-nav">02 Journey</a>
+            <a href="#s-quest" class="pencil-nav">03 Quest</a>
+            <a href="#s-ability" class="pencil-nav">04 Skills</a>
+            <a href="#s-invest" class="pencil-nav">05 Invest</a>
+        </div>
+
+        <div class="draggable-note" style="top: 150px; left: 50px; transform: rotate(-5deg); background-color: #81ecec; font-weight: bold; width: 90px; height: 90px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 10px; border-radius: 2px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1);">Keep dreaming.</div>
+        <div class="draggable-note" style="bottom: 120px; left: 180px; transform: rotate(-10deg); background-color: #a29bfe; font-weight: bold; width: 90px; height: 90px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 10px; border-radius: 2px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1);">C# Adrenaline</div>
+        <div class="draggable-note" style="top: 300px; left: 80px; transform: rotate(15deg); background-color: #ffdcb5; font-family: 'Caveat', cursive; font-size: 1.1rem; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 10px; border-radius: 2px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); z-index: 200;">(add story here?) <br> don't forget</div>
+        <div class="draggable-note" style="top: 450px; right: 80px; transform: rotate(-8deg); background-color: #ffeaa7; font-family: 'Caveat', cursive; font-size: 1.1rem; width: 90px; height: 90px; display: flex; align-items: center; justify-content: center; text-align: center; padding: 10px; border-radius: 2px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); z-index: 200;">(update this!!!) <br> needs more</div>
+
+        <nav class="story-nav">
+            <a href="#" onclick="openContactPage(event)">Say Hi!</a>
+            <a href="#" onclick="goBack()">Return</a>
+        </nav>
+
+        <div class="story-content">
+            <header style="margin-bottom: 80px; position: relative;">
+                <div class="margin-scribble" style="top: 10px; right: 10%; transform: rotate(8deg);">?? is this too much?</div>
+                <h1 style="font-family: 'Caveat'; font-size: 4.5rem; color: var(--marker);">Hey, I'm Mariam.</h1>
+                <p style="font-family: 'Caveat', cursive; opacity: 0.8; font-size: 1.8rem; line-height: 1.3;">I think a lot. And somewhere along the way I realized, making games is the only thing that lets me share <span class="rough-highlight">exactly</span> what's going on in my head.<br>So here we are.</p>
+            </header>
+
+            <div id="s-why" class="story-section-header">01 THE DRIVE</div>
+            <svg viewBox="0 0 200 80" width="160" height="64" style="display:block; margin: 10px 0 20px 0; opacity: 0.55;">
+              <path d="M 100,40 C 140,10 190,10 190,40 C 190,70 140,70 100,40 C 60,10 10,10 10,40 C 10,70 60,70 100,40 Z"
+                    fill="none" stroke="var(--marker)" stroke-width="3.5" stroke-linecap="round"
+                    pathLength="1" stroke-dasharray="1" stroke-dashoffset="0"/>
+            </svg>
+            <div style="font-family: 'Caveat', cursive; font-size: 1.35rem; line-height: 1.5; max-width: 800px; color: #444; margin-bottom: 60px; position: relative;">
+                <div class="margin-scribble" style="left: -80px; top: 30px; transform: rotate(-5deg);">← look here</div>
+                <div class="margin-scribble" style="right: -40px; top: 10px; transform: rotate(12deg);">lol why</div>
+                <p>I used to wonder what it would feel like if someone else could just <span class="rough-highlight">step inside</span> a feeling I was having for a minute. <del class="rough-strike">Not understand it</del> actually feel it. Games are the closest answer I've found. I'm not here to make things that run. I'm here to make things that land.</p>
+            </div>
+
+            <div id="s-journey" class="story-section-header" style="margin-top: 80px; text-align: center; position: relative;">
+                02 THE JOURNEY
+                <!-- Coffee Ring SVG -->
+                <svg width="150" height="150" style="position: absolute; left: -20px; top: -50px; opacity: 0.3; pointer-events: none; transform: rotate(15deg);" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="#6f4e37" stroke-width="3" opacity="0.6"/>
+                    <circle cx="48" cy="52" r="45" fill="none" stroke="#6f4e37" stroke-width="1.5" opacity="0.3"/>
+                    <circle cx="53" cy="49" r="45" fill="none" stroke="#6f4e37" stroke-width="2" stroke-dasharray="10,2,5,5" opacity="0.4"/>
+                </svg>
+            </div>
+            <div class="story-network-paper" style="background: #fdfbf7; padding: 40px; border: 1px solid #ddd; box-shadow: 5px 5px 15px rgba(0,0,0,0.1); transform: rotate(1deg); position: relative; max-width: 850px; margin: 0 auto 60px auto;">
+                <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 120px; height: 30px; background: rgba(255,255,255,0.6); box-shadow: 0 2px 4px rgba(0,0,0,0.05);"></div>
+                <h3 style="font-family: 'Caveat'; font-size: 2.5rem; color: var(--marker); margin-bottom: 15px;">Expanding the Map</h3>
+                <p style="font-family: 'Caveat', cursive; font-size: 1.35rem; color: #333; line-height: 1.5;">The club was supposed to be extracurricular. Then I became PR Head and suddenly I was talking to industry people I'd been following online, organizing events, learning how to hold a room. My code didn't change, but I <del class="rough-strike">stopped</del> finally stopped treating it like a secret.</p>
+                <!-- trailing sentence -->
+                <p style="font-family: 'Caveat', cursive; font-size: 1.2rem; color: #888; margin-top: 20px;">I had a whole plan for this section but then —</p>
+            </div>
+
+            <div id="s-quest" class="story-section-header" style="margin-top: 80px; position: relative;">
+                03 QUEST LOG
+                <!-- New Coffee Ring Stain -->
+                <svg width="180" height="180" style="position: absolute; right: 5%; top: -60px; opacity: 0.25; pointer-events: none; transform: rotate(-25deg);" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" fill="none" stroke="#6f4e37" stroke-width="4" opacity="0.6"/>
+                    <circle cx="47" cy="53" r="45" fill="none" stroke="#6f4e37" stroke-width="2" opacity="0.4"/>
+                    <path d="M 10,50 Q 50,90 90,50" fill="none" stroke="#6f4e37" stroke-width="1.5" opacity="0.3"/>
+                </svg>
+                <!-- Tiny Doodle (Star/Spiral) -->
+                <svg width="40" height="40" style="position: absolute; left: -50px; top: 10px; opacity: 0.7; transform: rotate(-15deg);" viewBox="0 0 100 100">
+                    <path d="M50,10 L60,40 L90,40 L65,60 L75,90 L50,70 L25,90 L35,60 L10,40 L40,40 Z" fill="none" stroke="var(--marker)" stroke-width="4" stroke-linejoin="round"/>
+                </svg>
+                <svg width="30" height="30" style="position: absolute; right: 20%; top: -10px; opacity: 0.7;" viewBox="0 0 100 100">
+                    <path d="M30,30 Q50,-10 70,30 T 70,70 T 30,70" fill="none" stroke="var(--marker)" stroke-width="2"/>
+                </svg>
+                <div class="margin-scribble" style="left: 250px; top: -20px; transform: rotate(-5deg);">* this is important</div>
+            </div>
+            <div class="grid-container">
+                <!-- NOTICED -->
+                <div class="story-card" onclick="window.open('https://weirdothen.itch.io/noticed', '_blank')" style="position: relative;">
+                    <!-- Peeled Sticky -->
+                    <div class="peeled-sticky" style="background-color: #fab1a0;"><span style="font-family: 'Caveat'; font-size: 0.9rem; padding: 5px; display: block; transform: rotate(-5deg);">redo?</span></div>
+                    <div class="story-pro-view">
+                        <div class="project-img-wrapper"><img src="noticed.jpg" alt="NOTICED" class="project-img"></div>
+                        <h3>NOTICED</h3>
+                        <p>3rd Place! My solo survival experiment. A journey into the seen and unseen.</p>
+                        <span style="font-family: 'Inter', sans-serif; font-size: 0.75rem; color: #aaa; margin-top: auto; padding-top: 12px; display: block;">hover to read →</span>
+                    </div>
+                    <div class="story-chaos-view"><p>I almost didn't submit. Two days of just sitting there, frozen. Then I decided to treat it like a question: <em>can I actually do this alone?</em> Turns out, yes. That surprised me more than the <del class="rough-strike">scary</del> exciting part of being solo did.</p></div>
+                </div>
+                <!-- STABLE BUILD -->
+                <div class="story-card" onclick="window.open('https://mohamed20047.itch.io/stable-build', '_blank')">
+                    <div class="story-pro-view">
+                        <div class="project-img-wrapper"><img src="stable.jpg" alt="Stable Build 02" class="project-img"></div>
+                        <h3>Stable Build 02</h3>
+                        <p>48 hours of chaos. 1st Place Most Liked by the community!</p>
+                        <span style="font-family: 'Inter', sans-serif; font-size: 0.75rem; color: #aaa; margin-top: auto; padding-top: 12px; display: block;">hover to read →</span>
+                    </div>
+                    <div class="story-chaos-view"><p>First time on a real team, 48 hours, everyone knowing what they're doing, except I wasn't sure I did. Then UML diagrams clicked, Scriptable Objects clicked, and I ended up doing the voice-over too because why not. Somehow it became the most liked game. I still think about that.</p></div>
+                </div>
+                <!-- KITCHEN CHAOS -->
+                <div class="story-card" onclick="window.open('https://weirdothen.itch.io/kitchen-chaos', '_blank')">
+                    <div class="story-pro-view">
+                        <div class="project-img-wrapper"><img src="KC.jpg" alt="Kitchen Chaos" class="project-img"></div>
+                        <h3>Kitchen Chaos</h3>
+                        <p>From "just working" to "working professionally." The architectural leap.</p>
+                        <span style="font-family: 'Inter', sans-serif; font-size: 0.75rem; color: #aaa; margin-top: auto; padding-top: 12px; display: block;">hover to read →</span>
+                    </div>
+                    <div class="story-chaos-view"><p>At some point I stopped caring if the game <em>worked</em> and started caring about <em>how</em> it worked. State machines for burning food logic sounds ridiculous until it's elegant. That's when I got a little obsessed with structure. Still am.</p></div>
+                </div>
+                <!-- ONEIROS -->
+                <div class="story-card" onclick="window.open('https://weirdothen.itch.io/oneiros2', '_blank')">
+                    <div class="story-pro-view">
+                        <div class="project-img-wrapper"><img src="oneiros.jpg" alt="Oneiros" class="project-img"></div>
+                        <h3>Oneiros</h3>
+                        <p>My very first game! Born from sleepless nights and curious dreams.</p>
+                        <span style="font-family: 'Inter', sans-serif; font-size: 0.75rem; color: #aaa; margin-top: auto; padding-top: 12px; display: block;">hover to read →</span>
+                    </div>
+                    <div class="story-chaos-view"><p>My first game. I made it about dreams because I didn't know what else to make it about, and it turns out that was the right call. My peers ranked it 2nd. I didn't expect that. I think that's what made me realize, <em>oh, this can actually reach people.</em></p></div>
+                </div>
+                <!-- MULTIPLAYER XO -->
+                <div class="story-card" onclick="window.open('https://weirdothen.itch.io/tic-tac-toe', '_blank')">
+                    <div class="story-pro-view">
+                        <div class="project-img-wrapper"><img src="xo.jpg" alt="Multiplayer XO" class="project-img"></div>
+                        <h3>Multiplayer XO</h3>
+                        <p>Connecting worlds. Making screens talk to each other in real-time.</p>
+                        <span style="font-family: 'Inter', sans-serif; font-size: 0.75rem; color: #aaa; margin-top: auto; padding-top: 12px; display: block;">hover to read →</span>
+                    </div>
+                    <div class="story-chaos-view"><p>I just wanted to see an X appear on two screens at the same time. When it finally did I sat there for a second like, <em>oh that's how the internet works.</em> One of those small moments that quietly changes how you think.</p></div>
+                </div>
+                <!-- ERASHIFT -->
+                <div class="story-card" onclick="window.open('https://weirdothen.itch.io/erashift', '_blank')">
+                    <div class="story-pro-view">
+                        <div class="project-img-wrapper"><img src="erashift.jpg.png" alt="ERAshift" class="project-img" style="background-color: #dcbf8c; object-fit: contain;"></div>
+                        <h3>ERAshift</h3>
+                        <p>A collaborative jam game with smooth flow and UI systems.</p>
+                        <span style="font-family: 'Inter', sans-serif; font-size: 0.75rem; color: #aaa; margin-top: auto; padding-top: 12px; display: block;">hover to read →</span>
+                    </div>
+                    <div class="story-chaos-view"><p>Worked in a team to build a jam game; built the <em>in-game store from scratch</em>, designed the <em>main menu</em>, and handled how the game moves between scenes to keep everything feeling <em>smooth and connected</em>.</p></div>
+                </div>
+            </div>
+
+            <!-- TORN PAPER INSERT -->
+            <div class="torn-paper" style="font-family: 'Caveat', cursive; font-size: 1.4rem; color: #555;">
+                <ul style="list-style-type: none; padding-left: 0;">
+                    <li>- look into ECS</li>
+                    <li>- ask someone about shaders</li>
+                    <li>- finish this later??</li>
+                    <li>- [ ] </li>
+                </ul>
+            </div>
+
+            <div id="s-ability" class="story-section-header" style="margin-top: 80px;">04 ability tree</div> <!-- Lowercase header -->
+            <div style="display: flex; flex-direction: column; gap: 30px; max-width: 900px; margin-bottom: 80px; position: relative;">
+                <div class="margin-scribble" style="right: -60px; top: 100px; transform: rotate(10deg);">* wait—</div>
+                <div class="margin-scribble" style="left: -70px; top: 250px; transform: rotate(-8deg);">← go back to this</div>
+                <div class="margin-scribble" style="right: -40px; top: 400px; transform: rotate(5deg);">idk yet</div>
+                <div style="padding: 20px; border-left: 4px solid var(--marker); background: var(--paper-offwhite) url('https://www.transparenttextures.com/patterns/paper-fibers.png'); transform: rotate(-0.5deg);">
+                    <h3 style="font-family: 'Caveat'; font-size: 1.95rem; color: var(--text); margin-bottom: 5px;">The Blueprint (C# & Unity)</h3>
+                    <p style="font-family: 'Caveat', cursive; font-size: 1.2rem; color: #333; line-height: 1.5; min-height: 50px;">I got obsessed with how things were built, not just that they worked. Messy code that runs is still <span class="rough-highlight">messy code.</span></p>
+                </div>
+                <div style="padding: 20px; border-left: 4px solid var(--marker); background: var(--paper-offwhite) url('https://www.transparenttextures.com/patterns/paper-fibers.png'); transform: rotate(0.5deg);">
+                    <h3 style="font-family: 'Caveat'; font-size: 1.7rem; color: var(--text); margin-bottom: 5px;">The Vision (Game Design)</h3>
+                    <p style="font-family: 'Caveat', cursive; font-size: 1.5rem; color: #333; line-height: 1.5; min-height: 50px;">CalArts taught me that 'fun' is not a feeling, it's a decision you make about 30 small things. I'm learning to make those decisions on purpose.</p>
+                </div>
+                <div style="padding: 20px; border-left: 4px solid var(--marker); background: var(--paper-offwhite) url('https://www.transparenttextures.com/patterns/paper-fibers.png'); transform: rotate(-0.5deg);">
+                    <h3 style="font-family: 'Caveat'; font-size: 2.1rem; color: var(--text); margin-bottom: 5px;">The Empathy (Product Design)</h3>
+                    <!-- Typography noise here -->
+                    <p style="font-family: 'Caveat', cursive; font-size: 1.45rem; color: #333; line-height: 1.5; min-height: 50px;">I've seen good games lose people in the first two minutes. I don't want to make things that need explaining. egFWD helped me think about the person holding the controller.</p>
+                </div>
+                <div style="padding: 20px; border-left: 4px solid var(--marker); background: var(--paper-offwhite) url('https://www.transparenttextures.com/patterns/paper-fibers.png'); transform: rotate(0.5deg);">
+                    <h3 style="font-family: 'Caveat'; font-size: 1.6rem; color: var(--text); margin-bottom: 5px;">The Universal Key (English Fluency)</h3>
+                    <p style="font-family: 'Caveat', cursive; font-size: 1.25rem; color: #333; line-height: 1.5; min-height: 50px;">Teaching English at CAC was the thing that made me actually think about how I communicate, not just whether I can. That's a different skill. C1, but more importantly, I know when to shut up and listen.</p>
+                </div>
+                <!-- Unfinished Ability Tree Item -->
+                <div style="padding: 20px; border-left: 4px dashed #aaa; background: rgba(255,255,255,0.4); transform: rotate(1.5deg);">
+                    <h3 style="font-family: 'Caveat'; font-size: 1.8rem; color: #888; margin-bottom: 5px;">[ Shader Graph? ]</h3>
+                    <p style="font-family: 'Caveat', cursive; font-size: 1.1rem; color: #aaa; line-height: 1.5; min-height: 50px;">(need to learn how to make water look right...)</p>
+                </div>
+            </div>
+
+            <!-- COMPACT STORYBOARD INVEST SECTION -->
+            <section id="s-invest" style="text-align: center; padding: 40px; border: 2px dashed var(--marker); background-color: rgba(231, 76, 60, 0.05); background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png'); margin-top: 80px; max-width: 900px; margin-left: auto; margin-right: auto;">
+                <div class="story-section-header" style="font-size: 2.2rem; margin-bottom: 15px;">05 INVEST IN THE JOURNEY</div>
+                <div style="font-family: 'Caveat', cursive; font-size: 1.35rem; color: #1a1a1a; line-height: 1.6;">
+                    <p style="margin: 10px 0;">
+                        <span style="background: yellow; padding: 0 5px; display: inline-block; transform: rotate(-1deg); margin-bottom: 10px; font-family: 'Caveat'; font-size: 1.6rem;">If you have the wisdom, I have the hunger.</span><br>
+                        There are things you can only learn from someone who's already been there. I'm at the part of the journey where I know enough to know what I'm missing, and I'd rather ask than pretend. A short conversation, an honest critique, a book you keep recommending to people, any of it. Genuinely.
+                    </p>
+                    <p style="color: var(--marker); font-weight: 800; font-size: 1.5rem; margin-top: 15px;">If something here clicked with you, I'd love to hear why.</p>
+                </div>
+                <a href="#" onclick="openInvestPage(event)" class="btn-invest-story" style="font-family: 'Caveat'; font-size: 2.2rem; color: var(--marker); text-decoration: none; border-bottom: 3px dashed var(--marker); padding-bottom: 5px; display: inline-block; margin-top: 20px;">INVEST IN THE JOURNEY</a>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        function showPath(path) {
+            document.getElementById('nexus').style.transform = 'translateY(-100%)';
+            document.body.style.overflow = 'auto';
+            if (path === 'architect') { document.getElementById('architect-path').classList.add('active'); }
+            else { document.getElementById('storyboard-path').classList.add('active'); }
+        }
+        function goBack() {
+            document.getElementById('nexus').style.transform = 'translateY(0)';
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => {
+                document.getElementById('architect-path').classList.remove('active');
+                document.getElementById('storyboard-path').classList.remove('active');
+            }, 800);
+        }
+        // --- SCROLL REVEAL ANIMATION ---
+        const revealElements = document.querySelectorAll('.arch-card, .arch-content > section > div, .arch-content > p, .arch-section-header, #invest');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal-visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // --- TILT EFFECT ---
+        const tiltElements = document.querySelectorAll('.story-card, .draggable-note');
+        tiltElements.forEach(el => {
+            el.dataset.base = el.style.transform || ''; 
+            el.addEventListener('mousemove', (e) => {
+                if(el.classList.contains('is-dragging')) return;
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -8;
+                const rotateY = ((x - centerX) / centerX) * 8;
+                el.style.transition = 'none';
+                el.style.transform = `${el.dataset.base} perspective(1000px) scale3d(1.05, 1.05, 1.05) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                el.style.zIndex = '50';
+            });
+            el.addEventListener('mouseleave', () => {
+                if(el.classList.contains('is-dragging')) return;
+                el.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1)';
+                el.style.transform = el.dataset.base;
+                el.style.zIndex = '';
+            });
+        });
+
+        // --- TYPEWRITER EFFECT ---
+        const typewriters = document.querySelectorAll('.typewriter-text');
+        const typeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !entry.target.classList.contains('typing-done')) {
+                    entry.target.classList.add('typing-done');
+                    const text = entry.target.dataset.text || entry.target.textContent.trim();
+                    entry.target.dataset.text = text;
+                    entry.target.innerHTML = '';
+                    entry.target.style.color = 'inherit';
+                    let i = 0;
+                    function typeChar() {
+                        if (i < text.length) {
+                            entry.target.innerHTML += text.charAt(i);
+                            i++;
+                            setTimeout(typeChar, 15 + Math.random() * 20);
+                        }
+                    }
+                    typeChar();
+                }
+            });
+        }, { threshold: 0.5 });
+        typewriters.forEach(tw => typeObserver.observe(tw));
+
+        // --- DRAGGABLE ELEMENTS ---
+        const draggables = document.querySelectorAll('.draggable-note, .draggable-pin');
+        let currentDragging = null;
+        let dragOffset = { x: 0, y: 0 };
+
+        draggables.forEach(note => {
+            if(typeof note.dataset.base === 'undefined') note.dataset.base = note.style.transform || '';
+            
+            note.addEventListener('mousedown', (e) => {
+                currentDragging = note;
+                dragOffset.x = e.clientX - note.offsetLeft;
+                dragOffset.y = e.clientY - note.offsetTop;
+                note.style.zIndex = 1000;
+                note.classList.add('is-dragging');
+                note.classList.remove('soft-landing');
+                
+                if (note.classList.contains('draggable-note')) {
+                    note.style.transition = 'transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s';
+                    note.style.transform = `scale(1.15) rotate(0deg)`;
+                } else {
+                    note.style.transition = 'none';
+                }
+            });
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!currentDragging) return;
+            currentDragging.style.left = (e.clientX - dragOffset.x) + 'px';
+            currentDragging.style.top = (e.clientY - dragOffset.y) + 'px';
+        });
+
+        document.addEventListener('mouseup', () => { 
+            if (currentDragging) {
+                let note = currentDragging;
+                currentDragging = null;
+                note.classList.remove('is-dragging');
+                
+                if (note.classList.contains('draggable-note')) {
+                    note.classList.add('soft-landing');
+                    note.style.transition = 'transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.5s cubic-bezier(0.2, 0.8, 0.2, 1)';
+                    note.style.transform = note.dataset.base;
+                    setTimeout(() => {
+                        note.classList.remove('soft-landing');
+                        note.style.transition = '';
+                    }, 500);
+                } else {
+                    note.style.transition = '';
+                }
+            }
+        });
+    
+        function openInvestPage(e) {
+            if(e) e.preventDefault();
+            document.getElementById('invest-overlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            document.getElementById('scrollToTopBtn').style.display = 'none';
+        }
+        function closeInvestPage() {
+            document.getElementById('invest-overlay').classList.remove('active');
+            if(document.getElementById('nexus').style.transform === 'translateY(-100%)' && !document.getElementById('contact-overlay').classList.contains('active') && !document.getElementById('coming-soon-overlay').classList.contains('active')) {
+                document.body.style.overflow = 'auto';
+                if(typeof handleScroll === 'function') handleScroll();
+            }
+        }
+
+        function openContactPage(e) {
+            if(e) e.preventDefault();
+            document.getElementById('contact-overlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            document.getElementById('scrollToTopBtn').style.display = 'none';
+        }
+        function closeContactPage() {
+            document.getElementById('contact-overlay').classList.remove('active');
+            if(document.getElementById('nexus').style.transform === 'translateY(-100%)' && !document.getElementById('invest-overlay').classList.contains('active') && !document.getElementById('coming-soon-overlay').classList.contains('active')) {
+                document.body.style.overflow = 'auto';
+                if(typeof handleScroll === 'function') handleScroll();
+            }
+        }
+        function openComingSoonPage(e) {
+            if(e) e.preventDefault();
+            document.getElementById('coming-soon-overlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            document.getElementById('scrollToTopBtn').style.display = 'none';
+        }
+        function closeComingSoonPage() {
+            document.getElementById('coming-soon-overlay').classList.remove('active');
+            if(document.getElementById('nexus').style.transform === 'translateY(-100%)' && !document.getElementById('invest-overlay').classList.contains('active') && !document.getElementById('contact-overlay').classList.contains('active')) {
+                document.body.style.overflow = 'auto';
+                if(typeof handleScroll === 'function') handleScroll();
+            }
+        }
+
+    </script>
+
+
+    <!-- INVEST OVERLAY SECTION -->
+    <div id="invest-overlay">
+        <div style="max-width: 600px; margin: 0 auto 20px auto;">
+            <div style="font-size: 3rem; margin-bottom: 10px;">❤️</div>
+            <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 10px;">Support the Journey</h2>
+            <p style="font-size: 0.95rem; color: #666;">Your support fuels the code and the creativity behind every project. Thank you for being part of the journey.</p>
+        </div>
+
+        <div class="invest-grid">
+            <div class="invest-option">
+                <div class="invest-icon">☕</div>
+                <h4>Coffee Talk</h4>
+                <p>Provide feedback and share a quick chat.</p>
+                <a href="https://www.linkedin.com/in/mariam-eid-b09a351b0/" target="_blank" class="invest-action-btn">Connect</a>
+            </div>
+
+            <div class="invest-option">
+                <div class="invest-icon">🤝</div>
+                <h4>For My Help</h4>
+                <p>Inquire about hiring me for your projects.</p>
+                <a href="#" onclick="openContactPage(event)" class="invest-action-btn">Hire Me</a>
+            </div>
+
+            <div class="invest-option">
+                <div class="invest-icon">📚</div>
+                <h4>Resources</h4>
+                <p>Recommend or provide access to growth tools.</p>
+                <a href="#" onclick="openContactPage(event)" class="invest-action-btn">Share</a>
+            </div>
+
+            <div class="invest-option">
+                <div class="invest-icon">⚡</div>
+                <h4>Fuel Builds</h4>
+                <p>Donate to support my learning and projects.</p>
+                <a href="#" onclick="openComingSoonPage(event)" class="invest-action-btn">Fuel Build</a>
+            </div>
+        </div>
+
+        <button class="invest-return-btn" onclick="closeInvestPage()">Return to Portfolio</button>
+    </div>
+
+    <!-- CONTACT OVERLAY SECTION -->
+    <div id="contact-overlay">
+        <div style="max-width: 600px; margin: 0 auto 20px auto;">
+            <div style="font-size: 3rem; margin-bottom: 10px;">🌐</div>
+            <h2 style="font-size: 2rem; font-weight: 800; margin-bottom: 10px;">Let's Connect</h2>
+            <p style="font-size: 0.95rem; color: #666;">Reach out through any of these channels. I'm always open to new opportunities and conversations.</p>
+        </div>
+
+        <div class="invest-grid">
+            <div class="invest-option">
+                <div class="invest-icon">🐙</div>
+                <h4>GitHub</h4>
+                <p>Check out my code.</p>
+                <a href="https://github.com/mariem-eid" target="_blank" class="invest-action-btn">GitHub</a>
+            </div>
+
+            <div class="invest-option">
+                <div class="invest-icon">💼</div>
+                <h4>LinkedIn</h4>
+                <p>Professional network.</p>
+                <a href="https://www.linkedin.com/in/mariam-eid-b09a351b0/" target="_blank" class="invest-action-btn">LinkedIn</a>
+            </div>
+
+            <div class="invest-option">
+                <div class="invest-icon">📄</div>
+                <h4>Resume</h4>
+                <p>View my resume.</p>
+                <a href="Mariam Eid CV.pdf" download="Mariam Eid CV.pdf" class="invest-action-btn">View Resume</a>
+            </div>
+        </div>
+
+        <div style="margin: 40px auto 0 auto; width: 100%; max-width: 900px; display: flex; justify-content: center; align-items: center;">
+            <button onclick="copyEmail(this)" class="invest-action-btn" style="width: 100%; max-width: 400px; padding: 15px; font-size: 1.4rem; background: var(--paper-brown); border: 2px dashed var(--marker); color: var(--text); border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; font-family: 'Caveat', cursive; box-shadow: 2px 4px 15px rgba(0,0,0,0.08); transition: all 0.3s;" onmouseover="this.style.transform='scale(1.02)'; this.style.boxShadow='5px 10px 20px rgba(0,0,0,0.12)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='2px 4px 15px rgba(0,0,0,0.08)';">
+                ✉️ <span class="email-text">Copy Email Address</span>
+            </button>
+        </div>
+
+        <button class="invest-return-btn" onclick="closeContactPage()">Return</button>
+    </div>
+
+    <!-- COMING SOON OVERLAY -->
+    <div id="coming-soon-overlay">
+        <div class="coming-soon-content">
+            <div class="pulsing-loader"></div>
+            <h2 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 15px; letter-spacing: 2px; text-transform: uppercase;">Coming Soon</h2>
+            <p style="font-size: 1rem; color: #888; max-width: 400px; margin: 0 auto 40px auto; line-height: 1.5;">This feature is currently under construction. Stay tuned for future updates.</p>
+            <button class="invest-return-btn" onclick="closeComingSoonPage()">Return</button>
+        </div>
+    </div>
+
+    <!-- SCROLL TO TOP BUTTON -->
+    <button id="scrollToTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); document.body.scrollTo({top: 0, behavior: 'smooth'}); document.documentElement.scrollTo({top: 0, behavior: 'smooth'});" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; padding: 12px 18px; font-family: 'Space Mono', monospace; font-weight: bold; background: #000; color: white; border: 2px solid var(--color-primary); cursor: pointer; display: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s, background 0.3s; border-radius: 4px;" onmouseover="this.style.transform='translateY(-3px)'; this.style.background='#333';" onmouseout="this.style.transform='translateY(0)'; this.style.background='#000';">
+        ↑ TOP
+    </button>
+
+    <script>
+        // Scroll to Top Logic
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+        const handleScroll = () => {
+            const scrollPos = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+            if (scrollPos > 300) {
+                scrollToTopBtn.style.display = 'block';
+            } else {
+                scrollToTopBtn.style.display = 'none';
+            }
+        };
+        // Using capture phase (true) guarantees we catch the scroll event on mobile regardless of which element the browser decides is the scroll container
+        window.addEventListener('scroll', handleScroll, true);
+    </script>
+
+    <!-- PARTICLE SYSTEM FOR ARCHITECT PATH -->
+    <script>
+        const canvas = document.getElementById('particleCanvas');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+
+            function initParticles() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                particles = [];
+                for(let i=0; i<70; i++) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        radius: Math.random() * 3 + 1.5,
+                        vx: (Math.random() - 0.5) * 0.6,
+                        vy: (Math.random() - 0.5) * 0.6
+                    });
+                }
+            }
+            initParticles();
+            window.addEventListener('resize', initParticles);
+
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'rgba(192, 57, 43, 0.15)';
+                ctx.shadowColor = 'rgba(192, 57, 43, 0.3)';
+                ctx.shadowBlur = 10;
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                    if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius * 1.5, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+                ctx.shadowBlur = 0; // reset
+                requestAnimationFrame(animateParticles);
+            }
+            animateParticles();
+        }
+
+        function copyEmail(btn) {
+            navigator.clipboard.writeText('emariemid@gmail.com').then(() => {
+                const textSpan = btn.querySelector('.email-text');
+                const originalText = 'Copy Email Address';
+                textSpan.innerText = 'Copied to Clipboard! ✨';
+                btn.style.background = 'var(--marker)';
+                btn.style.color = '#fff';
+                setTimeout(() => {
+                    textSpan.innerText = originalText;
+                    btn.style.background = 'var(--paper-brown)';
+                    btn.style.color = 'var(--text)';
+                }, 2000);
+            });
+        }
+    </script>
+    <script src="js/architect.js"></script>
+</body>
+</html>

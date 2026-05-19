@@ -1,0 +1,70 @@
+/* ============================================================
+   VARIABLES.CSS — Design Tokens (Fixed)
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Mono:wght@400;700&family=Caveat:wght@400;700&display=swap');
+
+:root {
+  --bg-primary:      #F8F6F3;
+  --bg-secondary:    #FFFFFF;
+  --bg-accent:       #faf8f5;
+  --bg-nav:          rgba(248, 246, 243, 0.88);
+  --text-primary:    #1a1a1a;
+  --text-secondary:  #555;
+  --text-muted:      #999;
+  --color-primary:   #c0392b;
+  --color-primary-hover: #a5311f;
+  --color-primary-light: rgba(192, 57, 43, 0.06);
+  --color-cta:       #1a1a1a;
+  --border:          #e8e4df;
+  --border-light:    #f0ece7;
+  --gradient-hero:   linear-gradient(135deg, #F8F6F3 0%, #FFF5F2 50%, #F8F6F3 100%);
+  --gradient-primary: linear-gradient(135deg, #e74c3c, #c0392b);
+  --gradient-ring:   conic-gradient(#e74c3c, #c0392b, #8e2218, #e74c3c);
+  --shadow-sm:    0 1px 3px rgba(0,0,0,0.04);
+  --shadow-md:    0 4px 12px rgba(0,0,0,0.06);
+  --shadow-lg:    0 12px 32px rgba(0,0,0,0.08);
+  --shadow-glow:  0 0 40px rgba(192, 57, 43, 0.12);
+  --shadow-card:  0 2px 12px rgba(0,0,0,0.04);
+  --font-family:  'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono:    'Space Mono', monospace;
+  --text-hero:    clamp(2.8rem, 5vw, 4.5rem);
+  --text-section: clamp(1.5rem, 3vw, 2rem);
+  --container-max:   1100px;
+  --nav-height:      72px;
+  --section-padding: clamp(3.5rem, 7vw, 6rem);
+  --radius-sm: 6px; --radius-md: 10px; --radius-lg: 16px;
+  --radius-xl: 20px; --radius-full: 9999px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition: 300ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Tag colors - subtle, not aggressive */
+  --tag-bg: #f3f0ec;
+  --tag-text: #6b5e52;
+  --tag-border: #e0dbd5;
+}
+
+/* ── Dark Mode ──────────────────────────────────────────── */
+[data-theme="dark"] {
+  --bg-primary:      #111111;
+  --bg-secondary:    #1a1a1a;
+  --bg-accent:       #161616;
+  --bg-nav:          rgba(17, 17, 17, 0.92);
+  --text-primary:    #e8e4df;
+  --text-secondary:  #a09890;
+  --text-muted:      #6b6560;
+  --color-primary:   #e06050;
+  --color-primary-hover: #d44f3f;
+  --color-primary-light: rgba(224, 96, 80, 0.08);
+  --border:          #2a2725;
+  --border-light:    #222;
+  --gradient-hero:   linear-gradient(135deg, #111 0%, #181210 50%, #111 100%);
+  --gradient-primary: linear-gradient(135deg, #e06050, #c0392b);
+  --shadow-sm:    0 1px 3px rgba(0,0,0,0.2);
+  --shadow-md:    0 4px 12px rgba(0,0,0,0.25);
+  --shadow-lg:    0 12px 32px rgba(0,0,0,0.35);
+  --shadow-glow:  0 0 50px rgba(224, 96, 80, 0.1);
+  --shadow-card:  0 2px 12px rgba(0,0,0,0.2);
+  --tag-bg: #252220;
+  --tag-text: #a09890;
+  --tag-border: #333;
+}
